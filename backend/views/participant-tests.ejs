@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Participant Test History</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="participant-tests-container">
+    <h1>Participant Test History - <%= participant %></h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Quiz Name</th>
+          <th>Creator Name</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const test of tests) { %>
+          <tr>
+            <td><a href="/quizcreator/<%= test.creator %>/quiz/<%= test.quizName %>/results/<%= participant %>"><%= test.quizName %></a></td>
+            <td><%= test.creator %></td>
+            <td><%= new Date(test.timestamp).toLocaleString() %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/home">Back to Home</a>
+  </div>
+</body>
+</html>

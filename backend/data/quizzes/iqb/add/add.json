@@ -1,0 +1,16 @@
+{
+  "quizName": "add",
+  "creatorName": "iqb",
+  "questions": [
+    {
+      "question": "2+3?",
+      "options": [
+        "2",
+        "23",
+        "5",
+        "3"
+      ],
+      "correctOption": "2"
+    }
+  ]
+}
