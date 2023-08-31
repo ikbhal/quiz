@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      background-image: url("https://res.cloudinary.com/dpjd6lg0h/image/upload/v1630386416/triangle-pattern_ztylkw.png");
+      background-repeat: repeat;
+    }
+    .quiz-container {
+      width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 50px;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .options {
+      margin-bottom: 15px;
+    }
+    .btn {
+      margin-right: 10px;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2 class="text-center mb-4">Quiz Test</h2>
+    <div class="question"></div>
+    <div class="options"></div>
+    <div class="text-center mt-3">
+      <button class="btn btn-primary prev-button">Previous</button>
+      <button class="btn btn-primary next-button">Next</button>
+      <button class="btn btn-danger stop-button">Stop</button>
+    </div>
+    <div class="result text-center mt-4" style="display: none;"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const $questionContainer = $('.question');
+      const $optionsContainer = $('.options');
+      const $prevButton = $('.prev-button');
+      const $nextButton = $('.next-button');
+      const $resultContainer = $('.result');
+
+      let quizData;
+      let currentQuestionIndex = 0;
+      let correctAnswers = 0;
+
+      $('.stop-button').click(function() {
+        displayResult();
+      });
+
+      // Fetch quiz data using AJAX
+      $.ajax({
+        url: 'https://quiz.rontohub.com/api/quiz',
+        method: 'GET',
+        success: function(data) {
+          quizData = data;
+          displayQuestion(currentQuestionIndex);
+        },
+        error: function() {
+          alert('Failed to fetch quiz data.');
+        }
+      });
+
+      function displayQuestion(questionIndex) {
+        const question = quizData[questionIndex];
+        $questionContainer.text(question.question);
+
+        $optionsContainer.empty();
+        question.options.forEach((option, index) => {
+          $optionsContainer.append(`
+            <label>
+              <input type="radio" name="answer" value="${index}">
+              ${option}
+            </label>
+            <br>
+          `);
+        });
+      }
+
+      function displayResult() {
+        $questionContainer.hide();
+        $optionsContainer.hide();
+        $prevButton.hide();
+        $nextButton.hide();
+        $resultContainer.show().text(`Correct Answers: ${correctAnswers} / Total Questions: ${quizData.length}`);
+      }
+
+      $prevButton.click(function() {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          displayQuestion(currentQuestionIndex);
+        }
+      });
+
+      $nextButton.click(function() {
+        const selectedAnswer = $("input[name='answer']:checked").val();
+        if (selectedAnswer !== undefined) {
+          if (parseInt(selectedAnswer) === quizData[currentQuestionIndex].correctOption) {
+            correctAnswers++;
+          }
+          if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            displayQuestion(currentQuestionIndex);
+          } else {
+            displayResult();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
