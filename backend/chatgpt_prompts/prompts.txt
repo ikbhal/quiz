@@ -1,0 +1,41 @@
+quizcreator
+quizparticipant
+
+<quizcreator>/quiz/<quizname>/
+ <quiz-name>.json 
+ 
+<quizcreator>/quiz/<quizname>/results/<quiz-participant>/
+datetime(yyyy-mm-dd-hh-mm-ss.json
+---
+/create-quiz page 
+quiz-create.ejs (ejs , view engiine, views folder)
+allo quiz creator enter 
+1) quiz creator name 
+2) quiz name 
+3) allow quiz creator 
+  to add quiz question
+     for each question allow to add 4 options 
+ 3.3) allow button create quiz butotn 
+ 
+4) load quiz by <quiz creator>, <quiz name> 
+  load the file ,
+  build quiz 
+  allow to edit 
+  removeingn question 
+  adding question 
+  change question 
+    name,
+	option edit 
+	correction answer 
+	
+5) show quiz test link 
+ save result 
+ /take-quiz-save-result
+   accept quiz creaetor, quiz name 
+   participant name 
+   
+   take entrire test 
+   save at backend in json 
+   
+   <quizcreator>/quiz/<quizname>/results/<quiz-participant>/
+datetime(yyyy-mm-dd-hh-mm-ss.json
