@@ -12,6 +12,13 @@ app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
+// Define a route to handle quiz data
+app.get('/api/quiz', (req, res) => {
+  // Read and send the quiz data from db.json
+  const quizData = require('./db.json').quiz;
+  res.json(quizData);
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
