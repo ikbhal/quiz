@@ -10,6 +10,11 @@ const middlewares = jsonServer.defaults();
 app.use(middlewares);
 app.use('/api/quiz', router);
 
+
+app.use('/ping', (req, res) =>{
+  return "pong";
+});
+
 // Start the server
 const PORT = 5001;
 app.listen(PORT, () => {
