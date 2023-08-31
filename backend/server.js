@@ -110,7 +110,7 @@ app.get('/quizcreator/:creatorName/quiz/:quizName', (req, res) => {
   }
 });
 
-// Endpoint to save participant's result
+// old: guess, not sure; Endpoint to save participant's result
 app.post('/take-quiz-save-result', (req, res) => {
   const { quizName, creatorName, participantName, answers } = req.body;
   const timestamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
@@ -121,7 +121,7 @@ app.post('/take-quiz-save-result', (req, res) => {
 });
 
 
-// Define a route to handle quiz data
+// old: Define a route to handle quiz data
 app.get('/api/quiz', (req, res) => {
   try {
     const dbPath = path.join(__dirname, 'db.json');
@@ -180,7 +180,9 @@ app.post('/quizcreator/:creator/quiz/:quizName/take/test', (req, res) => {
 
     const  participant_dateime = `${participant}-${Date.now()}`;
 
-    const resultPath = path.join(__dirname, 'data', 'quizzes', creator, quizName, 'results', `${participant_dateime}.json`);
+    const resultPath = path.join(__dirname, 'data', 'quizzes', creator, quizName,
+     'results', participant, `${dateime}.json`);
+
     fs.mkdirSync(resultPath, { recursive: true });
     fs.writeFileSync(resultPath, JSON.stringify(result, null, 2));
 
@@ -199,7 +201,10 @@ app.get('/quizcreator/:creator/quiz/:quizName/results/:participant_dateime', (re
   const participant_dateime = req.params.participant;
 
   try {
-    const resultPath = path.join(__dirname, 'data', 'results', creator, quizName, `${participant_dateime}.json`);
+    const resultPath = path.join(__dirname, 'data', 
+      'results', creator, quizName, 
+      'results', 
+      participant, `${dateime}.json`);
     // const resultData = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
 
     const quizPath = path.join(__dirname, 'data', 'quizzes', creator, quizName, 'quiz.json');
