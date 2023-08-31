@@ -14,9 +14,14 @@ app.get('/ping', (req, res) => {
 
 // Define a route to handle quiz data
 app.get('/api/quiz', (req, res) => {
-  // Read and send the quiz data from db.json
-  const quizData = require('./db.json').quiz;
-  res.json(quizData);
+  try {
+    const dbPath = path.join(__dirname, 'db.json');
+    const quizData = fs.readFileSync(dbPath, 'utf8');
+    res.json(JSON.parse(quizData));
+  } catch (error) {
+    console.error('Error reading quiz data:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Start the server
