@@ -1,0 +1,30 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+pids
+logs
+results
+
+# dotenv environment variables file
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Compiled binary addons
+build/Release
+
+# Log files
+*.log
+
+# Cache and build files
+.cache/
+dist/
