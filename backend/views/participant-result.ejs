@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="participant-result-container">
+    <h1>Quiz Result</h1>
+    <h2>Participant: <%= participant %></h2>
+    <p>Quiz: <%= quizName %></p>
+    <p>Score: <%= score %>/<%= totalQuestions %></p>
+    <h3>Correct Answers:</h3>
+    <ul>
+      <% for (const index of correctAnswers) { %>
+        <li><%= index + 1 %>. <%= questions[index].question %></li>
+      <% } %>
+    </ul>
+    <a href="/home">Back to Home</a>
+  </div>
+</body>
+</html>

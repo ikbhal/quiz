@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz List</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="quiz-list-container">
+    <h1>Quiz List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Quiz Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const quizName of quizNames) { %>
+        <tr>
+          <td><%= quizName %></td>
+          <td><a href="/quizcreator/<%= creator %>/quiz/<%= quizName %>/take/test">Take Quiz</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

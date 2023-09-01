@@ -1,4 +1,4 @@
-const questions = 
+export const questions = 
    [
     {
       "question": "Which is the most popular JavaScript framework?",
@@ -122,3 +122,4 @@ const questions =
       "correctOption": 3,
     }
   ]
+

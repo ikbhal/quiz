@@ -18,7 +18,16 @@ app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
-// Define a route to handle quiz data
+// support json
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+//set views  express
+// app.
+app.set('views', path.join(__dirname, 'views')); // Set the views folder
+app.set('view engine', 'ejs');
+
+// old: Define a route to handle quiz data
 app.get('/api/quiz', (req, res) => {
   try {
     const dbPath = path.join(__dirname, 'db.json');
@@ -45,18 +54,8 @@ app.get('/api/quiz/v3', (req, res) => {
     res.json(selectedQuestions);
   } catch (error) {
     console.error('Error reading quiz data:', error);
-    res.status(500).send('Internal Server Error');
   }
 });
-
-// Function to shuffle an array (Fisher-Yates shuffle algorithm)
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
 
 // Start the server
 app.listen(PORT, () => {
