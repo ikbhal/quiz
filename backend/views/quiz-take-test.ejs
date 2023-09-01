@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Quiz - <%= quizName %></title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="quiz-take-test-container">
+    <h1>Take Quiz - <%= quizName %></h1>
+    <form action="/quizcreator/<%= creator %>/quiz/<%= quizName %>/take/test" method="post">
+      <div class="participant-input">
+        <label for="participant">Participant Name:</label>
+        <input type="text" id="participant" name="participant" required>
+      </div>
+      
+      <% for (let i = 0; i < questions.length; i++) { %>
+      <div class="question">
+        <h3><%= i + 1 %>. <%= questions[i].question %></h3>
+        <% for (let j = 0; j < questions[i].options.length; j++) { %>
+        <label>
+          <input type="radio" name="answers[<%= i %>]" value="<%= j %>" required>
+          <%= questions[i].options[j] %>
+        </label><br>
+        <% } %>
+      </div>
+      <% } %>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>

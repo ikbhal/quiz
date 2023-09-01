@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Creator List</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="quiz-creator-list-container">
+    <h1>Quiz Creator List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Quiz Creator</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const creator of creators) { %>
+        <tr>
+          <td><%= creator %></td>
+          <td><a href="/quiz-creator-list/<%= creator %>">View Quizzes</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

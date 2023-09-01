@@ -1,0 +1,36 @@
+{
+  "quizName": "m",
+  "creatorName": "q",
+  "questions": [
+    {
+      "question": "2+3?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correctOption": "3"
+    },
+    {
+      "question": "1+2?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctOption": "2"
+    },
+    {
+      "question": "3+4",
+      "options": [
+        "3",
+        "5",
+        "7",
+        "4"
+      ],
+      "correctOption": "2"
+    }
+  ]
+}
