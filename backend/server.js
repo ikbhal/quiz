@@ -178,16 +178,20 @@ app.post('/quizcreator/:creator/quiz/:quizName/take/test', (req, res) => {
       totalQuestions: quizData.questions.length,
     };
 
-    const  participant_dateime = `${participant}-${Date.now()}`;
-
+    const datetime = Date.now();
+    
     const resultPath = path.join(__dirname, 'data', 'quizzes', creator, quizName,
-     'results', participant, `${dateime}.json`);
+     'results', participant, `${datetime}.json`);
 
-    fs.mkdirSync(resultPath, { recursive: true });
+     // make sure directory path correct
+     const resultDirPath = path.join(__dirname, 'data', 'quizzes', creator, quizName,
+     'results', participant);
+
+    fs.mkdirSync(resultDirPath, { recursive: true });
     fs.writeFileSync(resultPath, JSON.stringify(result, null, 2));
 
     // Redirect to result page
-    res.redirect(`/quizcreator/${creator}/quiz/${quizName}/results/${participant_dateime}`);
+    res.redirect(`/quizcreator/${creator}/quiz/${quizName}/results/${participant}/${datetime}`);
   } catch (error) {
     console.error('Error processing quiz submission:', error);
     res.status(500).send('Internal Server Error');
@@ -195,17 +199,19 @@ app.post('/quizcreator/:creator/quiz/:quizName/take/test', (req, res) => {
 });
 
 // Route to display participant result
-app.get('/quizcreator/:creator/quiz/:quizName/results/:participant_dateime', (req, res) => {
+// res.redirect(`/quizcreator/${creator}/quiz/${quizName}/results/${participant}/${dateime}`);
+app.get('/quizcreator/:creator/quiz/:quizName/results/:participant/:dateime', (req, res) => {
   const creator = req.params.creator;
   const quizName = req.params.quizName;
-  const participant_dateime = req.params.participant;
+  const participant = req.params.participant;
+  const datetime = req.params.dateime;
 
   try {
     const resultPath = path.join(__dirname, 'data', 
-      'results', creator, quizName, 
-      'results', 
-      participant, `${dateime}.json`);
-    // const resultData = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
+      'quizzes', creator, quizName,
+      'results', participant, 
+      `${datetime}.json`);
+    const resultData = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
 
     const quizPath = path.join(__dirname, 'data', 'quizzes', creator, quizName, 'quiz.json');
     const quizData = JSON.parse(fs.readFileSync(quizPath, 'utf8'));
