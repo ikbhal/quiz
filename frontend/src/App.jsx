@@ -1,11 +1,10 @@
 import "./App.css";
-import QuizData from "./Components/QuizData";
-import { questions } from './Utils/questions'
+import Quiz from "./Components/Quiz";
 
 function App() {
   return (
     <>
-      <QuizData questions={questions} />
+      <Quiz />
     </>
   );
 }
